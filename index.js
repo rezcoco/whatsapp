@@ -1,4 +1,4 @@
-const qrcode = require('qrcode-terminal');
+const qrcode = require('qrcode');
 const express = require('express');
 const PORT = process.env.PORT || 8080
 const { Client } = require('whatsapp-web.js');
@@ -15,12 +15,12 @@ const app = express();
 app.listen(PORT, () => console.log(`Running at Port: ${PORT}`));
 
 client.on('qr', qr => {
-  qrcode.generate(qr, qrcode => {
-    console.log(qrcode)
+  qrcode.toDataURL(qr, function (err, url) {
+    console.log(url)
     app.get('/', (req, res) => {
       res.send(qrcode)
     })
-  });
+  })
 });
 
 client.on('ready', () => {
