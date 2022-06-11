@@ -6,7 +6,7 @@ const { Client } = require('whatsapp-web.js');
 const options = [ '--disable-gpu', '--disable-setuid-sandbox', '--no-sandbox', '--no-zygote' ]
 const client = new Client({
   puppeteer: {
-    headless: true
+    headless: true,
     args: options
   }
 });
