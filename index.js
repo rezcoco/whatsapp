@@ -3,7 +3,7 @@ const express = require('express');
 const PORT = process.env.PORT || 8080
 const { Client } = require('whatsapp-web.js');
 
-const options = [ '--disable-gpu', '--disable-setuid-sandbox', '--no-sandbox', '--no-zygote' ]
+const options = [ '--disable-gpu', '--disable-setuid-sandbox', '--no-zygote' ]
 const client = new Client({
   puppeteer: {
     headless: true,
