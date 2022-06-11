@@ -11,7 +11,7 @@ RUN apt-get update \
     && apt-get install -y libnss3 libnspr4 libatk-bridge2.0-0 libdrm2 libxkbcommon0 libgbm1 libasound2 \
     && rm -rf /var/lib/apt/lists/*
 
-COPY package.json .
+COPY *.json ./
 RUN npm i puppeteer \
     # Add user so we don't need --no-sandbox.
     # same layer as npm install to keep re-chowned files from using up several hundred MBs more space
