@@ -8,6 +8,7 @@ RUN apt-get update \
     && apt-get update \
     && apt-get install -y google-chrome-stable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 \
       --no-install-recommends \
+    && apt-get install -y libnss3 libnspr4 libatk-bridge2.0-0 libdrm2 libxkbcommon0 libgbm1 libasound2 \
     && rm -rf /var/lib/apt/lists/*
 
 COPY package.json .
@@ -22,7 +23,6 @@ RUN npm i puppeteer \
     && chown -R pptruser:pptruser /package-lock.json
 
 RUN npm install
-# RUN apt-get update && apt-get install -y libnss3 libnspr4 libatk-bridge2.0-0 libdrm2 libxkbcommon0 libgbm1 libasound2
 COPY . .
 
 USER pptruser
