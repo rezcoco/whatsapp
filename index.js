@@ -15,10 +15,10 @@ const app = express();
 app.listen(PORT, () => console.log(`Running at Port: ${PORT}`));
 
 client.on('qr', qr => {
-  qrcode.toDataURL(qr, function (err, url) {
-    console.log(url)
+  qrcode.toDataURL(qr, function (err, src) {
+    console.log('Done !')
     app.get('/', (req, res) => {
-      res.send(qrcode)
+      res.render('/', { src })
     })
   })
 });
