@@ -12,7 +12,7 @@ const client = new Client({
 });
 
 const app = express();
-app.listen(PORT, () => console.log(`Running at Port: ${PORT}`);
+app.listen(PORT, () => console.log(`Running at Port: ${PORT}`));
 
 client.on('qr', qr => {
   qrcode.generate(qr, qrcode => {
