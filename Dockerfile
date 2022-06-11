@@ -1,6 +1,5 @@
 FROM node:16.15.0-stretch
 
-WORKDIR /usr/src/app
 RUN apt-get update \
     && apt-get install -y wget gnupg \
     && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
@@ -12,7 +11,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY *.json ./
-RUN npm i puppeteer \
+RUN npm i \
     # Add user so we don't need --no-sandbox.
     # same layer as npm install to keep re-chowned files from using up several hundred MBs more space
     && groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
@@ -22,7 +21,6 @@ RUN npm i puppeteer \
     && chown -R pptruser:pptruser /package.json \
     && chown -R pptruser:pptruser /package-lock.json
 
-RUN npm install
 COPY . .
 
 USER pptruser
