@@ -12,7 +12,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY *.json ./
-RUN npm i puppeteer \
+RUN npm i \
     # Add user so we don't need --no-sandbox.
     # same layer as npm install to keep re-chowned files from using up several hundred MBs more space
     && groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
@@ -22,7 +22,6 @@ RUN npm i puppeteer \
     && chown -R pptruser:pptruser /package.json \
     && chown -R pptruser:pptruser /package-lock.json
 
-RUN npm install
 COPY . .
 
 USER pptruser
