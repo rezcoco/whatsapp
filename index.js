@@ -34,8 +34,9 @@ if(fs.existsSync(SESSION_FILE_PATH)) {
 }
 
 // Use the saved values
+let client
 if (sessionData) {
-    const client = new Client({
+    client = new Client({
         puppeteer: {
             args: options 
         },
@@ -44,7 +45,7 @@ if (sessionData) {
         })
     });
 } else {
-    const client = new Client({
+    client = new Client({
         puppeteer: {
             args: options 
         }
