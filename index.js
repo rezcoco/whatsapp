@@ -35,26 +35,26 @@ client.on('ready', () => {
 
 client.on('message', message => {
   let msg
-	if(!contact.isMyContact) {
-	  msg = 'Apakah anda kurir ?\nKetik "#ya" jika ya, "#bukan" jika bukan.\n\n"Ini adalah pesan otomatis"'
-		return client.sendMessage(message.from, msg);
-	}
-	if (message.body === '#ya') {
-	  msg = 'Ketik "#paket" jika mau antar paket, "#lokasi" jika anda perlu detail lokasi'
-	  return client.reply(message.from, msg);
-	}
-	if (message.body === '#paket') {
-	  msg = 'Tolong taruh paketnya di kursi / depan pintu kamar kos saya (No 3)\n*NOTE:* Usahakan jangan dititipkan'
+  if(!contact.isMyContact) {
+    msg = 'Apakah anda kurir ?\nKetik "#ya" jika ya, "#bukan" jika bukan.\n\n"Ini adalah pesan otomatis"'
+    return client.sendMessage(message.from, msg);
+  }
+  if (message.body === '#ya') {
+    msg = 'Ketik "#paket" jika mau antar paket, "#lokasi" jika anda perlu detail lokasi'
     return client.reply(message.from, msg);
-	}
-	if (message.body === '#lokasi') {
-	  msg = 'https://maps.app.goo.gl/CBAPNRqB8EtCx26E6'
+  }
+  if (message.body === '#paket') {
+    msg = 'Tolong taruh paketnya di kursi / depan pintu kamar kos saya (No 3)\n*NOTE:* Usahakan jangan dititipkan'
     return client.reply(message.from, msg);
-	}
-	if (message.body === '#bukan') {
-	  msg = 'Oke, silahkan tuliskan pesan anda'
+  }
+  if (message.body === '#lokasi') {
+    msg = 'https://maps.app.goo.gl/CBAPNRqB8EtCx26E6'
     return client.reply(message.from, msg);
-	}
+  }
+  if (message.body === '#bukan') {
+    msg = 'Oke, silahkan tuliskan pesan anda'
+    return client.reply(message.from, msg);
+  }
 });
  
 client.initialize(); 
