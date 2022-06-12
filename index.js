@@ -2,15 +2,10 @@ const qrcode = require('qrcode');
 const express = require('express');
 const bp = require('body-parser');
 const PORT = process.env.PORT || 8080
-const { Client, Contact } = require('whatsapp-web.js');
+const fs = require('fs');
+const { Client, Contact, LegacySessionAuth } = require('whatsapp-web.js');
 
 const options = [ '--no-sandbox', '--disable-setuid-sandbox' ]
-const client = new Client({
-  puppeteer: {
-    headless: true,
-    args: options 
-  }
-});
 const contact = new Contact()
 
 const app = express();
@@ -27,6 +22,40 @@ client.on('qr', qr => {
       res.render('qrcode', { src })
     })
   })
+});
+
+// Path where the session data will be stored
+const SESSION_FILE_PATH = './session.json';
+
+// Load the session data if it has been previously saved
+let sessionData;
+if(fs.existsSync(SESSION_FILE_PATH)) {
+    sessionData = require(SESSION_FILE_PATH);
+}
+
+// Use the saved values
+if (sessionData) {
+    const client = new Client({
+        authStrategy: new LegacySessionAuth({
+            session: sessionData
+        })
+    });
+} else {
+    const client = new Client({
+        puppeteer: {
+            args: options 
+        }
+    });
+}
+
+// Save session values to the file upon successful auth
+client.on('authenticated', (session) => {
+    sessionData = session;
+    fs.writeFile(SESSION_FILE_PATH, JSON.stringify(session), (err) => {
+        if (err) {
+            console.error(err);
+        }
+    });
 });
 
 client.on('ready', () => {
