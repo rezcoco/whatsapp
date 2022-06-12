@@ -15,15 +15,6 @@ app.use(bp.urlencoded({ extended: false }));
 app.use(bp.json());
 app.listen(PORT, () => console.log(`Running at Port: ${PORT}`));
 
-client.on('qr', qr => {
-  qrcode.toDataURL(qr, function (err, src) {
-    console.log('Done !')
-    app.get('/', (req, res) => {
-      res.render('qrcode', { src })
-    })
-  })
-});
-
 // Path where the session data will be stored
 const SESSION_FILE_PATH = './session.json';
 
@@ -51,6 +42,15 @@ if (sessionData) {
         }
     });
 }
+
+client.on('qr', qr => {
+  qrcode.toDataURL(qr, function (err, src) {
+    console.log('Done !')
+    app.get('/', (req, res) => {
+      res.render('qrcode', { src })
+    })
+  })
+});
 
 // Save session values to the file upon successful auth
 client.on('authenticated', (session) => {
