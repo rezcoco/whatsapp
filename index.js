@@ -36,6 +36,9 @@ if(fs.existsSync(SESSION_FILE_PATH)) {
 // Use the saved values
 if (sessionData) {
     const client = new Client({
+        puppeteer: {
+            args: options 
+        },
         authStrategy: new LegacySessionAuth({
             session: sessionData
         })
