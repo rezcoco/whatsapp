@@ -21,7 +21,7 @@ client.on('qr', qr => {
   qrcode.toDataURL(qr, function (err, src) {
     console.log('Done !')
     app.get('/', (req, res) => {
-      res.render('/', { src })
+      res.send({ src })
     })
   })
 });
@@ -29,5 +29,5 @@ client.on('qr', qr => {
 client.on('ready', () => {
   console.log('Client is ready!');
 });
-
+ 
 client.initialize();
