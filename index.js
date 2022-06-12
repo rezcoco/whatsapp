@@ -56,5 +56,5 @@ client.on('message', message => {
     return client.reply(message.from, msg);
   }
 });
- 
+  
 client.initialize(); 
