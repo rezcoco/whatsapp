@@ -8,7 +8,7 @@ const options = [ '--no-sandbox', '--disable-setuid-sandbox' ]
 const client = new Client({
   puppeteer: {
     headless: true,
-    args: options
+    args: options 
   }
 });
 
